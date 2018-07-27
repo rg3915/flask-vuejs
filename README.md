@@ -30,10 +30,9 @@ A app está rodando na porta 8080.
 
 Abra mais um terminal pra inserir alguns dados:
 
-```
 Abra o Python, e digite:
 
-```python
+```
 source .venv/bin/activate
 cd my_app/backend
 python
