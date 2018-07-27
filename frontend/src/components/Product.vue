@@ -10,8 +10,8 @@
       </thead>
       <tbody>
         <tr v-for="product in products">
-          <td>{{ product.name }}</td>
-          <td style="text-align:right">{{ formatPrice(product.price) }}</td>
+          <td style="text-align:left">{{ product.name }}</td>
+          <td style="text-align:right">{{ product.price | formatPrice }}</td>
         </tr>
       </tbody>
     </table>
@@ -32,7 +32,9 @@ export default {
         console.log(result)
       this.products = result.data
       })
-    },
+    }
+  },
+  filters: {
     formatPrice(value) {
       let val = (value/1).toFixed(2).replace('.', ',')
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
