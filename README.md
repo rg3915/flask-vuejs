@@ -11,10 +11,45 @@ git clone https://github.com/rg3915/flask-vuejs.git
 cd flask-vuejs
 python3 -m venv .venv
 source .venv/bin/activate
+cd my_app/backend
 pip install -r requirements.txt
-cd my_app
+python run.py
 ```
 
+A app está rodando na porta 5000.
+
+Abra outro terminal e digite:
+
+```
+cd my_app/frontend
+npm install
+npm run dev
+```
+
+A app está rodando na porta 8080.
+
+Abra mais um terminal pra inserir alguns dados:
+
+```
+Abra o Python, e digite:
+
+```
+source .venv/bin/activate
+cd my_app/backend
+python
+import requests
+r = requests.post('http://localhost:5000/product/', data={'name': 'iPhone 6s', 'price': 699})
+r = requests.post('http://localhost:5000/product/', data={'name': 'iPad Pro', 'price': 999})
+r = requests.post('http://localhost:5000/product/', data={'name': 'bip', 'price': 1000})
+r = requests.post('http://localhost:5000/product/', data={'name': 'walkman', 'price': 1200})
+r = requests.post('http://localhost:5000/product/', data={'name': 'discman', 'price': 1800})
+r = requests.post('http://localhost:5000/product/', data={'name': 'dic vinil', 'price': 450})
+r = requests.get('http://localhost:5000/product/')
+r.json()
+r = requests.get('http://localhost:5000/product/1')
+r.json()
+exit()
+```
 
 ## Tutorial
 
