@@ -19,7 +19,10 @@
 </template>
 
 <script>
+
 import axios from 'axios';
+import { formatPrice } from '../utils'
+
 export default {
   data () {
     return {
@@ -35,10 +38,7 @@ export default {
     }
   },
   filters: {
-    formatPrice(value) {
-      let val = (value/1).toFixed(2).replace('.', ',')
-      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-    }
+    formatPrice
   },
   mounted(){
     this.getProducts()
