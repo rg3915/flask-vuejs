@@ -4,8 +4,8 @@
     <form class="pure-form">
       <fieldset>
         <input type="text" placeholder="Produto" v-model="name">
-        <input type="number" placeholder="Preço" v-model="price" @keyup.enter="addProduct()">
-        <button type="submit" class="pure-button pure-button-primary" @click="addProduct()">Adicionar</button>
+        <input type="number" placeholder="Preço" v-model="price" @keyup.enter="addProduct">
+        <button type="submit" class="pure-button pure-button-primary" @click="addProduct">Adicionar</button>
       </fieldset>
     </form>
     <table class="pure-table">
@@ -45,9 +45,10 @@ export default {
         this.products = result.data.data
       })
     },
-    addProduct: function(){
+    addProduct(){
       data = {name: this.name, price: this.price}
-      axios.post('http://localhost:5000/product/', data=data)
+      console.log(data);
+      axios.post('http://localhost:5000/product/', data)
       .then(
         this.products.unshift(
           {
