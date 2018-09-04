@@ -1,4 +1,3 @@
-import json
 from flask import request, jsonify, Blueprint, abort
 from flask.views import MethodView
 from my_app import db, app
@@ -16,23 +15,28 @@ def home():
 class ProductView(MethodView):
 
     def get(self, id=None, page=1):
+        _list = []
         if not id:
             products = Product.query.paginate(page, 10).items
-            res = {}
             for product in products:
-                res[product.id] = {
-                    'name': product.name,
-                    'price': str(product.price),
-                }
+                _list.append(
+                    {
+                        'name': product.name,
+                        'price': str(product.price),
+                    }
+                )
         else:
             product = Product.query.filter_by(id=id).first()
             if not product:
                 abort(404)
-            res = {
-                'name': product.name,
-                'price': str(product.price),
-            }
-        return jsonify(res)
+            _list.append(
+                {
+                    'name': product.name,
+                    'price': str(product.price),
+                }
+            )
+        data = {'data': _list}
+        return jsonify(data)
 
     def post(self):
         name = request.form.get('name')
