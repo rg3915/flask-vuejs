@@ -58,6 +58,8 @@ r.json()
 exit()
 ```
 
+![image](image.png)
+
 ## Tutorial
 
 Comece criando duas pastas:
@@ -237,12 +239,18 @@ Abra o Python, e digite:
 ```
 python
 import requests
-r = requests.post('http://localhost:5000/product/', data={'name': 'iPhone 6s', 'price': 699})
-r = requests.post('http://localhost:5000/product/', data={'name': 'iPad Pro', 'price': 999})
-r = requests.post('http://localhost:5000/product/', data={'name': 'bip', 'price': 1000})
-r = requests.post('http://localhost:5000/product/', data={'name': 'walkman', 'price': 1200})
-r = requests.post('http://localhost:5000/product/', data={'name': 'discman', 'price': 1800})
-r = requests.post('http://localhost:5000/product/', data={'name': 'dic vinil', 'price': 450})
+datas = [
+    {'name': 'Blackberry', 'price': 999},
+    {'name': 'Bip', 'price': 120},
+    {'name': 'Walkman', 'price': 350},
+    {'name': 'Discman', 'price': 450},
+    {'name': 'Mini System 3 em 1', 'price': 950},
+    {'name': 'Vinil', 'price': 380},
+]
+
+for data in datas:
+    requests.post('http://localhost:5000/product/', data=data)
+
 r = requests.get('http://localhost:5000/product/')
 r.json()
 r = requests.get('http://localhost:5000/product/1')
