@@ -1,4 +1,3 @@
-import json
 from flask import request, jsonify, Blueprint, abort
 from flask.views import MethodView
 from my_app import db, app
@@ -40,7 +39,7 @@ class ProductView(MethodView):
         return jsonify(data)
 
     def post(self):
-        data = json.loads(request.data)
+        data = request.json
         name = data.get('name')
         price = float(data.get('price'))
         product = Product(name, price)
