@@ -1,13 +1,13 @@
 <template>
   <div class="product">
     <h1>Produtos</h1>
-    <form class="pure-form">
+    <div class="pure-form">
       <fieldset>
         <input type="text" placeholder="Produto" v-model="name">
         <input type="number" placeholder="Preço" v-model="price" @keyup.enter="addProduct">
         <button type="submit" class="pure-button pure-button-primary" @click="addProduct">Adicionar</button>
       </fieldset>
-    </form>
+    </div>
     <table class="pure-table">
       <thead>
         <tr>
@@ -46,17 +46,18 @@ export default {
       })
     },
     addProduct(){
-      data = {name: this.name, price: this.price}
-      console.log(data);
-      axios.post('http://localhost:5000/product/', data)
-      .then(
-        this.products.unshift(
+      let data = {'name': this.name, 'price': this.price}
+      axios.post('http://localhost:5000/product/add', data)
+      .then((result) => {
+        this.products.push(
           {
             name: this.name,
             price: this.price
           }
         )
-      )
+        this.name = ''
+        this.price = ''
+      })
     }
   },
   filters: {

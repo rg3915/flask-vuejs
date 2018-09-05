@@ -1,3 +1,4 @@
+import json
 from flask import request, jsonify, Blueprint, abort
 from flask.views import MethodView
 from my_app import db, app
@@ -17,7 +18,7 @@ class ProductView(MethodView):
     def get(self, id=None, page=1):
         _list = []
         if not id:
-            products = Product.query.paginate(page, 10).items
+            products = Product.query.paginate(page, 20).items
             for product in products:
                 _list.append(
                     {
@@ -39,10 +40,9 @@ class ProductView(MethodView):
         return jsonify(data)
 
     def post(self):
-        name = request.form.get('name')
-        price = request.form.get('price')
-        import ipdb
-        ipdb.set_trace()
+        data = json.loads(request.data)
+        name = data.get('name')
+        price = float(data.get('price'))
         product = Product(name, price)
         db.session.add(product)
         db.session.commit()
