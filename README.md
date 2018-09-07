@@ -275,8 +275,8 @@ A app está rodando na porta http://localhost:8080
 
 Veja alguns arquivos:
 
-App.vue
-components/Product.vue
+* App.vue
+* components/Product.vue
 
 
 https://www.codementor.io/garethdwyer/building-a-crud-application-with-flask-and-sqlalchemy-dm3wv7yu2
