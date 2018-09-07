@@ -24,10 +24,13 @@ class ProductViewRequests(MethodView):
         product = Product(name, price)
         db.session.add(product)
         db.session.commit()
-        return jsonify({product.id: {
-            'name': product.name,
-            'price': str(product.price),
-        }})
+        product_dict = {
+            product.id: {
+                'name': product.name,
+                'price': str(product.price),
+            }
+        }
+        return jsonify(product_dict)
 
 
 class ProductView(MethodView):
@@ -37,23 +40,22 @@ class ProductView(MethodView):
         if not id:
             products = Product.query.paginate(page, 20).items
             for product in products:
-                _list.append(
-                    {
-                        'id': product.id,
-                        'name': product.name,
-                        'price': str(product.price),
-                    }
-                )
+                product_dict = {
+                    'id': product.id,
+                    'name': product.name,
+                    'price': str(product.price),
+                }
+                _list.append(product_dict)
         else:
             product = Product.query.filter_by(id=id).first()
             if not product:
                 abort(404)
-            _list.append(
-                {
-                    'name': product.name,
-                    'price': str(product.price),
-                }
-            )
+            product_dict = {
+                'id': product.id,
+                'name': product.name,
+                'price': str(product.price),
+            }
+            _list.append(product_dict)
         data = {'data': _list}
         return jsonify(data)
 
@@ -64,10 +66,13 @@ class ProductView(MethodView):
         product = Product(name, price)
         db.session.add(product)
         db.session.commit()
-        return jsonify({product.id: {
-            'name': product.name,
-            'price': str(product.price),
-        }})
+        product_dict = {
+            product.id: {
+                'name': product.name,
+                'price': str(product.price),
+            }
+        }
+        return jsonify(product_dict)
 
     def put(self, id):
         # Update the record for the provided id
@@ -85,15 +90,27 @@ class ProductView(MethodView):
 
 product_view_requests = ProductViewRequests.as_view('product_view_requests')
 product_view = ProductView.as_view('product_view')
+
 app.add_url_rule(
-    '/product/', view_func=product_view, methods=['GET', 'POST']
+    '/product/',
+    view_func=product_view,
+    methods=['GET', 'POST']
 )
+
 app.add_url_rule(
-    '/product/add', view_func=product_view_requests, methods=['POST']
+    '/product/add',
+    view_func=product_view_requests,
+    methods=['POST']
 )
+
 app.add_url_rule(
-    '/product/<int:id>', view_func=product_view, methods=['GET']
+    '/product/<int:id>',
+    view_func=product_view,
+    methods=['GET']
 )
+
 app.add_url_rule(
-    '/product/<int:id>/delete/', view_func=product_view, methods=['DELETE']
+    '/product/<int:id>/delete/',
+    view_func=product_view,
+    methods=['DELETE']
 )
