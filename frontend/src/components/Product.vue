@@ -13,12 +13,17 @@
         <tr>
           <th>Produto</th>
           <th>Preço</th>
+          <th>Ações</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="product in products">
           <td style="text-align:left">{{ product.name }}</td>
           <td style="text-align:right">{{ product.price | formatPrice }}</td>
+          <td>
+            <!-- <span class="dropdown-item" style="cursor:pointer" click="edit(item)"><i class="fa fa-edit" style="color:#20a8d8"></i></span> -->
+            <span class="dropdown-item" style="cursor:pointer" @click="remove(product)"><i class="fa fa-close" style="color:red"></i></span>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -57,6 +62,13 @@ export default {
         )
         this.name = ''
         this.price = ''
+      })
+    },
+    remove: function(product) {
+      axios.delete('http://localhost:5000/product/' + product.id + '/delete/')
+      .then((response) => {
+        var idx = this.products.indexOf(product)
+        this.products.splice(idx, 1)
       })
     }
   },

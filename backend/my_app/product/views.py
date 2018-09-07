@@ -39,6 +39,7 @@ class ProductView(MethodView):
             for product in products:
                 _list.append(
                     {
+                        'id': product.id,
                         'name': product.name,
                         'price': str(product.price),
                     }
@@ -75,7 +76,11 @@ class ProductView(MethodView):
 
     def delete(self, id):
         # Delete the record for the provided id.
-        return
+        product = Product.query.filter_by(id=id).first()
+        db.session.delete(product)
+        db.session.commit()
+        response = {'message': 'Success'}
+        return jsonify(response)
 
 
 product_view_requests = ProductViewRequests.as_view('product_view_requests')
@@ -88,4 +93,7 @@ app.add_url_rule(
 )
 app.add_url_rule(
     '/product/<int:id>', view_func=product_view, methods=['GET']
+)
+app.add_url_rule(
+    '/product/<int:id>/delete/', view_func=product_view, methods=['DELETE']
 )
