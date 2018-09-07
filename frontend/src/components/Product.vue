@@ -21,7 +21,7 @@
           <td style="text-align:left">{{ product.name }}</td>
           <td style="text-align:right">{{ product.price | formatPrice }}</td>
           <td>
-            <!-- <span class="dropdown-item" style="cursor:pointer" click="edit(item)"><i class="fa fa-edit" style="color:#20a8d8"></i></span> -->
+            <!-- <span class="dropdown-item" style="cursor:pointer;padding-right:10px" click="edit(item)"><i class="fa fa-edit" style="color:#20a8d8"></i></span> -->
             <span class="dropdown-item" style="cursor:pointer" @click="remove(product)"><i class="fa fa-close" style="color:red"></i></span>
           </td>
         </tr>
@@ -40,6 +40,10 @@ export default {
     return {
       name: '',
       price: '',
+      editProduct: {
+        name: '',
+        price: ''
+      },
       products: []
     }
   },
