@@ -12,6 +12,24 @@ def home():
     return "Welcome to the product Home."
 
 
+class ProductViewRequests(MethodView):
+    '''
+    ProductView to use with requests.
+    '''
+
+    def post(self):
+        data = request.form
+        name = data.get('name')
+        price = data.get('price')
+        product = Product(name, price)
+        db.session.add(product)
+        db.session.commit()
+        return jsonify({product.id: {
+            'name': product.name,
+            'price': str(product.price),
+        }})
+
+
 class ProductView(MethodView):
 
     def get(self, id=None, page=1):
@@ -60,12 +78,13 @@ class ProductView(MethodView):
         return
 
 
+product_view_requests = ProductViewRequests.as_view('product_view_requests')
 product_view = ProductView.as_view('product_view')
 app.add_url_rule(
-    '/product/', view_func=product_view, methods=['GET']
+    '/product/', view_func=product_view, methods=['GET', 'POST']
 )
 app.add_url_rule(
-    '/product/add', view_func=product_view, methods=['POST']
+    '/product/add', view_func=product_view_requests, methods=['POST']
 )
 app.add_url_rule(
     '/product/<int:id>', view_func=product_view, methods=['GET']

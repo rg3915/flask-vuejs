@@ -49,7 +49,7 @@ datas = [
 ]
 
 for data in datas:
-    requests.post('http://localhost:5000/product/', data=data)
+    requests.post('http://localhost:5000/product/add', data=data)
 
 r = requests.get('http://localhost:5000/product/')
 r.json()
@@ -249,7 +249,7 @@ datas = [
 ]
 
 for data in datas:
-    requests.post('http://localhost:5000/product/', data=data)
+    requests.post('http://localhost:5000/product/add', data=data)
 
 r = requests.get('http://localhost:5000/product/')
 r.json()

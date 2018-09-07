@@ -47,7 +47,7 @@ export default {
     },
     addProduct(){
       let data = {'name': this.name, 'price': this.price}
-      axios.post('http://localhost:5000/product/add', data)
+      axios.post('http://localhost:5000/product/', data)
       .then((result) => {
         this.products.push(
           {
