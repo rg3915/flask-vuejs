@@ -60,8 +60,9 @@ export default {
       .then((result) => {
         this.products.push(
           {
-            name: this.name,
-            price: this.price
+            id: result.data.data.id,
+            name: result.data.data.name,
+            price: result.data.data.price
           }
         )
         this.name = ''

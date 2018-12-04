@@ -67,12 +67,12 @@ class ProductView(MethodView):
         db.session.add(product)
         db.session.commit()
         product_dict = {
-            product.id: {
-                'name': product.name,
-                'price': str(product.price),
-            }
+            'id': product.id,
+            'name': product.name,
+            'price': str(product.price),
         }
-        return jsonify(product_dict)
+        data = {'data': product_dict}
+        return jsonify(data)
 
     def put(self, id):
         # Update the record for the provided id
