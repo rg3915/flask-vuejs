@@ -97,20 +97,9 @@ app.add_url_rule(
     methods=['GET', 'POST']
 )
 
-app.add_url_rule(
-    '/product/add',
-    view_func=product_view_requests,
-    methods=['POST']
-)
 
 app.add_url_rule(
     '/product/<int:id>',
     view_func=product_view,
-    methods=['GET']
-)
-
-app.add_url_rule(
-    '/product/<int:id>/delete/',
-    view_func=product_view,
-    methods=['DELETE']
+    methods=['GET', 'DELETE']
 )

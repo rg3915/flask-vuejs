@@ -44,19 +44,20 @@ export default {
         name: '',
         price: ''
       },
-      products: []
+      products: [],
+      url: 'http://localhost:5000/product/'
     }
   },
   methods: {
     getProducts(){
-      axios.get('http://localhost:5000/product/')
+      axios.get(this.url)
       .then((result) => {
         this.products = result.data.data
       })
     },
     addProduct(){
       let data = {'name': this.name, 'price': this.price}
-      axios.post('http://localhost:5000/product/', data)
+      axios.post(this.url, data)
       .then((result) => {
         this.products.push(
           {
@@ -70,7 +71,7 @@ export default {
       })
     },
     remove: function(product) {
-      axios.delete('http://localhost:5000/product/' + product.id + '/delete/')
+      axios.delete(this.url + product.id)
       .then((response) => {
         var idx = this.products.indexOf(product)
         this.products.splice(idx, 1)
