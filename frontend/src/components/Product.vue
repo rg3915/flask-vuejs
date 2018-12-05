@@ -70,7 +70,7 @@ export default {
         this.price = ''
       })
     },
-    remove: function(product) {
+    remove(product){
       axios.delete(this.url + product.id)
       .then((response) => {
         var idx = this.products.indexOf(product)
