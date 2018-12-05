@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <img height="100px" src="./assets/flask-logo.png">
     <img height="100px" src="./assets/logo.png">
     <!-- <HelloWorld/> -->
     <Product/>
